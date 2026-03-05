@@ -1,10 +1,10 @@
 import axios from 'axios';
 
 // ============================================================
-// 🔑  API Keys — Replace with your own keys before testing
+// 🔑  API Keys — loaded from .env file (see .env.example)
 // ============================================================
-const SPOON_KEY = '9ebe0eda516942f1ba523dbca375b193';
-const GEMINI_KEY = 'AIzaSyDtUq70Cn0AuLObCEbUCOInVfWbxPDfuy4';
+const SPOON_KEY = import.meta.env.VITE_SPOONACULAR_KEY;
+const GEMINI_KEY = import.meta.env.VITE_GEMINI_KEY;
 
 const spoonApi = axios.create({
     baseURL: 'https://api.spoonacular.com',
