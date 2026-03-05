@@ -1,16 +1,118 @@
-# React + Vite
+# 🍳 PantryPal AI — Smart Recipe Finder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+PantryPal AI is a modern, AI-powered recipe discovery app that helps you find delicious recipes from ingredients you already have. Search by keyword, enter pantry ingredients, or let **Google Gemini AI** generate creative recipes on the fly — reducing food waste one meal at a time.
 
-Currently, two official plugins are available:
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-3.4-06B6D4?logo=tailwindcss&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?logo=javascript&logoColor=black)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 🔍 **Keyword Search** — Search thousands of recipes by name using the Spoonacular API
+- 🥕 **Pantry Mode** — Enter ingredients you have on hand and discover what you can cook
+- 🤖 **AI Recipe Generator** — Describe any craving and Google Gemini AI generates a full recipe with steps, ingredients & tips
+- 📖 **Detailed Recipe View** — See full instructions, ingredient lists, prep/cook times, and nutritional info
+- 🌙 **Dark Mode UI** — Sleek dark-themed interface with smooth animations and glassmorphism effects
+- 📱 **Fully Responsive** — Looks great on all screen sizes
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack
+
+| Category | Technology |
+|---|---|
+| **Frontend** | [React 19](https://react.dev/) |
+| **Build Tool** | [Vite 7](https://vite.dev/) |
+| **Styling** | [Tailwind CSS 3](https://tailwindcss.com/) |
+| **Routing** | [React Router v7](https://reactrouter.com/) |
+| **HTTP Client** | [Axios](https://axios-http.com/) |
+| **Icons** | [Lucide React](https://lucide.dev/) |
+| **Fonts** | [Inter](https://fonts.google.com/specimen/Inter) & [Outfit](https://fonts.google.com/specimen/Outfit) (Google Fonts) |
+| **Recipe API** | [Spoonacular API](https://spoonacular.com/food-api) |
+| **AI** | [Google Gemini 2.0 Flash](https://ai.google.dev/) |
+| **Linting** | [ESLint 9](https://eslint.org/) |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (v18+)
+- npm or yarn
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/YOUR_USERNAME/pantry-pal.git
+cd pantry-pal
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
+```
+
+The app will be available at `http://localhost:5173`.
+
+### API Keys
+
+The app uses two external APIs. Add your own keys in `src/services/api.js`:
+
+- **Spoonacular** — Get a free key at [spoonacular.com](https://spoonacular.com/food-api)
+- **Google Gemini** — Get a free key at [ai.google.dev](https://ai.google.dev/)
+
+---
+
+## 📁 Project Structure
+
+```
+pantry-pal/
+├── public/                  # Static assets
+├── src/
+│   ├── assets/              # Images & media
+│   ├── components/          # Reusable UI components
+│   │   ├── AiPromptInput    # AI prompt text input
+│   │   ├── AiRecipeModal    # Modal for AI-generated recipes
+│   │   ├── Hero             # Landing hero section
+│   │   ├── IngredientInput  # Pantry ingredient entry
+│   │   ├── ModeSelector     # Search/Pantry/AI mode toggle
+│   │   ├── Navbar           # Top navigation bar
+│   │   ├── RecipeCard       # Individual recipe card
+│   │   ├── RecipeGrid       # Grid layout for recipe cards
+│   │   ├── SearchBar        # Keyword search input
+│   │   └── Footer           # Site footer
+│   ├── pages/
+│   │   ├── Home             # Main landing & search page
+│   │   └── RecipeDetail     # Full recipe detail page
+│   ├── services/
+│   │   └── api.js           # Spoonacular & Gemini API integrations
+│   ├── App.jsx              # Root component with routing
+│   ├── main.jsx             # App entry point
+│   └── index.css            # Global styles
+├── tailwind.config.js       # Tailwind theme & animations config
+├── vite.config.js           # Vite configuration
+└── package.json
+```
+
+---
+
+## 📜 Available Scripts
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Start development server |
+| `npm run build` | Build for production |
+| `npm run preview` | Preview production build |
+| `npm run lint` | Run ESLint |
+
+---
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
