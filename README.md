@@ -1,6 +1,8 @@
 # 🍳 PantryPal AI — Smart Recipe Finder
 
-PantryPal AI is a modern, AI-powered recipe discovery app that helps you find delicious recipes from ingredients you already have. Search by keyword, enter pantry ingredients, or let **Google Gemini AI** generate creative recipes on the fly — reducing food waste one meal at a time.
+**[Live Demo](https://pantry-pal-ai.netlify.app/)**
+
+PantryPal AI is a modern, AI-powered recipe discovery app that helps you find delicious recipes from ingredients you already have. Search by keyword, enter pantry ingredients, or let **Google Gemma 3 via OpenRouter** generate creative recipes on the fly — reducing food waste one meal at a time.
 
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=white)
@@ -13,7 +15,7 @@ PantryPal AI is a modern, AI-powered recipe discovery app that helps you find de
 
 - 🔍 **Keyword Search** — Search thousands of recipes by name using the Spoonacular API
 - 🥕 **Pantry Mode** — Enter ingredients you have on hand and discover what you can cook
-- 🤖 **AI Recipe Generator** — Describe any craving and Google Gemini AI generates a full recipe with steps, ingredients & tips
+- 🤖 **AI Recipe Generator** — Describe any craving and Google Gemma 3 (via OpenRouter) generates a full recipe with steps, ingredients & tips
 - 📖 **Detailed Recipe View** — See full instructions, ingredient lists, prep/cook times, and nutritional info
 - 🌙 **Dark Mode UI** — Sleek dark-themed interface with smooth animations and glassmorphism effects
 - 📱 **Fully Responsive** — Looks great on all screen sizes
@@ -32,7 +34,7 @@ PantryPal AI is a modern, AI-powered recipe discovery app that helps you find de
 | **Icons** | [Lucide React](https://lucide.dev/) |
 | **Fonts** | [Inter](https://fonts.google.com/specimen/Inter) & [Outfit](https://fonts.google.com/specimen/Outfit) (Google Fonts) |
 | **Recipe API** | [Spoonacular API](https://spoonacular.com/food-api) |
-| **AI** | [Google Gemini 2.0 Flash](https://ai.google.dev/) |
+| **AI** | [Google Gemma 3 27B](https://openrouter.ai/models/google/gemma-3-27b-it) (via OpenRouter) |
 | **Linting** | [ESLint 9](https://eslint.org/) |
 
 ---
@@ -60,12 +62,15 @@ npm run dev
 
 The app will be available at `http://localhost:5173`.
 
-### API Keys
+The app uses two external APIs. Create a `.env` file in the root directory and add your own keys:
 
-The app uses two external APIs. Add your own keys in `src/services/api.js`:
+- **Spoonacular API** — Get a free key at [spoonacular.com](https://spoonacular.com/food-api)
+- **OpenRouter API** — Get a free key at [openrouter.ai](https://openrouter.ai/). By default, the app requests the completely free `google/gemma-3-27b-it` model so you won't be charged for AI usage.
 
-- **Spoonacular** — Get a free key at [spoonacular.com](https://spoonacular.com/food-api)
-- **Google Gemini** — Get a free key at [ai.google.dev](https://ai.google.dev/)
+```env
+VITE_SPOONACULAR_KEY=your_spoonacular_key_here
+VITE_OPENROUTER_KEY=your_openrouter_key_here
+```
 
 ---
 
@@ -91,7 +96,7 @@ pantry-pal/
 │   │   ├── Home             # Main landing & search page
 │   │   └── RecipeDetail     # Full recipe detail page
 │   ├── services/
-│   │   └── api.js           # Spoonacular & Gemini API integrations
+│   │   └── api.js           # Spoonacular & OpenRouter API integrations
 │   ├── App.jsx              # Root component with routing
 │   ├── main.jsx             # App entry point
 │   └── index.css            # Global styles
