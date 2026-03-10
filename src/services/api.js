@@ -86,7 +86,15 @@ Generate a creative, delicious recipe in the following strict JSON format (no ma
         }
     );
 
+    if (data.error) {
+        throw new Error(`OpenRouter Error: ${data.error.message || 'Unknown error from AI'}`);
+    }
+
     const text = data.choices?.[0]?.message?.content || '';
+
+    if (!text || text.trim() === '') {
+        throw new Error('The AI failed to generate a recipe. Please try again.');
+    }
 
     // Strip possible markdown code fences
     const cleaned = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();

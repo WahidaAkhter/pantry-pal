@@ -16,6 +16,7 @@ export default function Home() {
     const [error, setError] = useState('');
     const [searched, setSearched] = useState(false);
     const [aiRecipe, setAiRecipe] = useState(null);
+    const [aiWarning, setAiWarning] = useState('');
 
     const handleSearch = async (query) => {
         setLoading(true);
@@ -52,14 +53,23 @@ export default function Home() {
     const handleAiGenerate = async (prompt) => {
         setLoading(true);
         setError('');
+        setAiWarning('');
         setSearched(true);
         setRecipes([]);
+
+        const warningTimer = setTimeout(() => {
+            setAiWarning('The AI is taking longer than usual. Please wait...');
+        }, 8000);
+
         try {
             const data = await generateAiRecipe(prompt);
             setAiRecipe(data);
+            setAiWarning(''); // Clear warning if successful before timeout
         } catch (err) {
-            setError('Failed to generate AI recipe. Please check your API key and try again.');
+            setError(err.message || 'Failed to generate AI recipe. Please check your API key and try again.');
+            setAiWarning(''); // Clear warning on error
         } finally {
+            clearTimeout(warningTimer);
             setLoading(false);
         }
     };
@@ -68,6 +78,7 @@ export default function Home() {
         setMode(newMode);
         setRecipes([]);
         setError('');
+        setAiWarning('');
         setSearched(false);
         setAiRecipe(null);
     };
@@ -146,6 +157,15 @@ export default function Home() {
                     {error && (
                         <div className="text-center animate-fade-in">
                             <p className="text-red-400 text-sm glass-light inline-block px-4 py-2 rounded-xl">{error}</p>
+                        </div>
+                    )}
+
+                    {aiWarning && loading && mode === 'ai' && (
+                        <div className="text-center animate-fade-in -mt-4">
+                            <p className="text-yellow-400/90 text-sm glass-light inline-block px-4 py-2 rounded-xl flex items-center gap-2 mx-auto w-fit">
+                                <Sparkles size={14} className="animate-pulse" />
+                                {aiWarning}
+                            </p>
                         </div>
                     )}
 
