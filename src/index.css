@@ -24,16 +24,16 @@
   }
 
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
   }
 
   ::-webkit-scrollbar-track {
-    background: #18181b;
+    background: transparent;
   }
 
   ::-webkit-scrollbar-thumb {
     background: #3f3f46;
-    border-radius: 4px;
+    border-radius: 10px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
@@ -43,17 +43,19 @@
 
 @layer components {
   .glass {
-    background: rgba(24, 24, 27, 0.7);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(63, 63, 70, 0.5);
+    background: rgba(24, 24, 27, 0.65);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05), 0 8px 32px rgba(0, 0, 0, 0.4);
   }
 
   .glass-light {
-    background: rgba(39, 39, 42, 0.5);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(63, 63, 70, 0.3);
+    background: rgba(39, 39, 42, 0.4);
+    backdrop-filter: blur(16px) saturate(150%);
+    -webkit-backdrop-filter: blur(16px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
   }
 
   .gradient-text {
@@ -66,53 +68,58 @@
   .gradient-border {
     position: relative;
   }
+
   .gradient-border::before {
     content: '';
     position: absolute;
     inset: 0;
     border-radius: inherit;
     padding: 1px;
-    background: linear-gradient(135deg, #4ade80, #16a34a);
+    background: linear-gradient(135deg, rgba(74, 222, 128, 0.5), rgba(22, 163, 74, 0.1));
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
   }
 
   .card-hover {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
+
   .card-hover:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(74, 222, 128, 0.1);
+    border-color: rgba(74, 222, 128, 0.2);
   }
 
   .shimmer-bg {
-    background: linear-gradient(
-      90deg,
-      rgba(39, 39, 42, 0.4) 25%,
-      rgba(63, 63, 70, 0.4) 50%,
-      rgba(39, 39, 42, 0.4) 75%
-    );
+    background: linear-gradient(90deg,
+        rgba(39, 39, 42, 0.4) 25%,
+        rgba(63, 63, 70, 0.4) 50%,
+        rgba(39, 39, 42, 0.4) 75%);
     background-size: 200% 100%;
     animation: shimmer 2s linear infinite;
   }
 
   .btn-primary {
-    @apply bg-gradient-to-r from-brand-500 to-brand-600 text-white font-semibold 
-      px-6 py-3 rounded-xl shadow-lg shadow-brand-500/25 
-      hover:shadow-brand-500/40 hover:scale-[1.02] 
-      active:scale-[0.98] transition-all duration-200;
+    @apply relative overflow-hidden bg-gradient-to-r from-brand-500 to-brand-600 text-white font-semibold px-6 py-3 rounded-xl border border-brand-400/30 hover:scale-[1.03] active:scale-[0.97] transition-all duration-300;
+  }
+
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: shine 3s infinite;
   }
 
   .btn-secondary {
-    @apply glass text-surface-50 font-medium px-5 py-2.5 rounded-xl
-      hover:bg-surface-700/60 transition-all duration-200;
+    @apply glass text-surface-50 font-medium px-5 py-2.5 rounded-xl hover:bg-surface-700/80 hover:border-surface-700/50 transition-all duration-300;
   }
 
   .input-field {
-    @apply w-full bg-surface-800/60 border border-surface-700/50 rounded-xl 
-      px-4 py-3 text-surface-50 placeholder-surface-200/40
-      focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/50
-      transition-all duration-200;
+    @apply w-full bg-surface-900/60 border border-surface-700/50 rounded-xl px-4 py-3 text-surface-50 placeholder-surface-200/40 shadow-inner focus:outline-none focus:ring-2 focus:ring-brand-500/40 focus:border-brand-500/50 focus:bg-surface-800/80 transition-all duration-300;
   }
 }

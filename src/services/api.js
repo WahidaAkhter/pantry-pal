@@ -4,7 +4,7 @@ import axios from 'axios';
 // 🔑  API Keys — loaded from .env file (see .env.example)
 // ============================================================
 const SPOON_KEY = import.meta.env.VITE_SPOONACULAR_KEY;
-const GEMINI_KEY = import.meta.env.VITE_GEMINI_KEY;
+const OPENROUTER_KEY = import.meta.env.VITE_OPENROUTER_KEY;
 
 const spoonApi = axios.create({
     baseURL: 'https://api.spoonacular.com',
@@ -50,11 +50,10 @@ export const getRecipeDetails = async (id) => {
 };
 
 // ──────────────────────────────────────────────────────────────
-//  Google Gemini AI helper
+//  OpenRouter AI helper
 // ──────────────────────────────────────────────────────────────
 
-const GEMINI_URL =
-    'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
+const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
 
 export const generateAiRecipe = async (prompt) => {
     const systemPrompt = `You are a world-class chef AI. The user will describe what ingredients they have or what kind of meal they want. 
@@ -71,16 +70,23 @@ Generate a creative, delicious recipe in the following strict JSON format (no ma
 }`;
 
     const { data } = await axios.post(
-        `${GEMINI_URL}?key=${GEMINI_KEY}`,
+        OPENROUTER_URL,
         {
-            contents: [
-                { role: 'user', parts: [{ text: `${systemPrompt}\n\nUser request: ${prompt}` }] },
-            ],
+            model: 'google/gemma-3-27b-it',
+            messages: [
+                { role: 'system', content: systemPrompt },
+                { role: 'user', content: `User request: ${prompt}` }
+            ]
         },
-        { headers: { 'Content-Type': 'application/json' } }
+        {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${OPENROUTER_KEY}`
+            }
+        }
     );
 
-    const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    const text = data.choices?.[0]?.message?.content || '';
 
     // Strip possible markdown code fences
     const cleaned = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();

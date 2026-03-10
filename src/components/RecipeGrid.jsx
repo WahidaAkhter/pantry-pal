@@ -26,10 +26,16 @@ export default function RecipeGrid({ recipes, loading, emptyMessage }) {
 
     if (!recipes || recipes.length === 0) {
         return (
-            <div className="text-center py-16 animate-fade-in">
-                <UtensilsCrossed size={48} className="mx-auto text-surface-700 mb-4" />
-                <p className="text-surface-200/50 text-lg">{emptyMessage || 'No recipes found'}</p>
-                <p className="text-surface-200/30 text-sm mt-1">Try a different search or add more ingredients</p>
+            <div className="flex flex-col items-center justify-center p-12 text-center animate-fade-in glass-light rounded-2xl border border-surface-700/30 max-w-2xl mx-auto shadow-inner">
+                <div className="w-16 h-16 rounded-full bg-surface-800/80 flex items-center justify-center mb-6 shadow-[0_0_15px_rgba(255,255,255,0.05)] text-surface-600">
+                    <UtensilsCrossed size={32} />
+                </div>
+                <h3 className="text-xl font-display font-semibold text-surface-100 mb-2">
+                    {emptyMessage || 'No recipes found'}
+                </h3>
+                <p className="text-surface-200/50 text-sm max-w-sm">
+                    Try adjusting your search terms or adding more ingredients to your pantry list.
+                </p>
             </div>
         );
     }

@@ -21,6 +21,14 @@ export default function AiPromptInput({ onGenerate, loading }) {
                 <textarea
                     value={prompt}
                     onChange={(e) => setPrompt(e.target.value)}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter' && !e.shiftKey) {
+                            e.preventDefault();
+                            if (prompt.trim() && !loading) {
+                                handleSubmit(e);
+                            }
+                        }
+                    }}
                     placeholder="Describe what you have or what you're craving…"
                     rows={3}
                     className="input-field !pr-14 resize-none"

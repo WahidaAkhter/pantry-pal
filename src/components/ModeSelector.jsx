@@ -13,12 +13,15 @@ export default function ModeSelector({ active, onChange }) {
                 <button
                     key={id}
                     onClick={() => onChange(id)}
-                    className={`flex-1 w-full sm:w-auto flex items-center gap-3 px-5 py-3.5 rounded-xl border transition-all duration-200
+                    className={`flex-1 w-full sm:w-auto flex items-center gap-3 px-5 py-4 rounded-xl border transition-all duration-300 relative overflow-hidden group
             ${active === id
-                            ? 'bg-brand-500/10 border-brand-500/40 text-brand-400 shadow-lg shadow-brand-500/10'
-                            : 'border-surface-700/40 text-surface-200 hover:border-surface-700 hover:bg-surface-800/40'
+                            ? 'bg-brand-500/10 border-brand-400/50 text-brand-400 shadow-[0_0_20px_rgba(34,197,94,0.15)] scale-[1.02]'
+                            : 'border-surface-700/40 text-surface-200 hover:border-surface-600 hover:bg-surface-800/60'
                         }`}
                 >
+                    {active === id && (
+                        <div className="absolute inset-0 bg-gradient-to-r from-brand-500/5 to-transparent shimmer-bg opacity-50 pointer-events-none" />
+                    )}
                     <span className={`${active === id ? 'text-brand-400' : 'text-surface-200/60'} transition-colors`}>
                         {icon}
                     </span>
